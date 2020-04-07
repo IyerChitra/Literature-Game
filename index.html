@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Literature</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; background: #d3d3d336;}
+      h1 {align-self: center; }
+        div{
+            background: url(public/images/back2.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0 auto;
+            width: 80%;
+            height: 40em;
+        }
+      
+      button { height:50px; 
+    width:150px; 
+    margin: -20px -50px; 
+    position:relative;
+    top:50%; 
+    left:50%; background-image: linear-gradient(#0a3513, rgb(41, 175, 156));  border: none; padding: 10px; color: white; font-size: large; font-weight: bold; border: 5px solid white; visibility: hidden;}
+      
+      .fixed-top {
+          margin: auto;
+    position: fixed;
+    top: 0em;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    width: 80%;
+    height: 10%;
+    background-image: linear-gradient(#0a3513, rgb(41, 175, 156));  
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+    padding-top: 2%;
+}
+        .fixed-bottom {
+          margin: auto;
+    position: fixed;
+    bottom: 0em;
+    z-index: 1030;
+    width: 80%;
+    height: 5%;
+    background-image: linear-gradient(#0a3513, rgb(41, 175, 156));  
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+    
+}
+        #startbutton {
+            margin: auto;
+            width: 80%;
+            height: 20%;
+            background-image: none;
+        }
+        .messages {
+            margin: auto;
+            width: 80%;
+            height: 20%;
+            background-image: none;
+        }
+        #message { list-style-type: none; padding: 0; margin-top: 10%;}
+        #message li { padding: 5px 10px; color: whitesmoke; font-weight: bold;}
+    </style>
+  </head>
+  <body>
+      <div>
+      <div class ="fixed-top">Literature</div>
+      <div class = "messages">
+          <ul id="message"></ul>
+      </div>
+      <div id="startbutton">
+      
+        <button type="button" id="start" value="Start Game!" onclick="myFunc()" >Start Game!</button>
+        <button type="button" id="ask" value="Start Game!" onclick="ask()" >Ask Card</button>
+     </div>
+          
+      
+    
+          <div class ="fixed-bottom"></div>
+       </div>   
+     <script src="/socket.io/socket.io.js"></script> 
+     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        
+         var socket = io();
+         $(function () {
+        socket.on('userMessage', function(msg){
+            //$('#message').empty();
+            $('#message').append($('<li>').html(msg));
+            //document.getElementById("message").textContent = msg.parseAsHtml;
+        });
+        socket.on('displayButton', function(msg){
+                if(msg === 'true'){
+                document.getElementById("start").style.visibility = 'visible';
+            }
+        });
+        socket.on('askCard', function(msg){
+                if(msg === 'true'){
+                document.getElementById("ask").style.visibility = 'visible';
+            }
+        });
+         });
+            
+            function myFunc(){
+            console.log(document.getElementById("start"));
+            document.getElementById("start").style.visibility = 'hidden';
+            socket.emit('startgame', '');
+        }
+        
+        function ask(){
+          var playerNo = prompt('Please enter the Player No. you want to ask:');
+            var askedCard = prompt('Please enter the card you want to ask:');
+            document.getElementById("ask").style.visibility = 'hidden';
+            socket.emit('askCard', playerNo, askedCard);
+        }
+        (function enterUserName(){
+            var roomID;
+            var inputMaxPlayers=2;
+            if (confirm('Do you have an Exisiting Room ID you want to join?')) {
+                roomID = prompt('Please enter the Room ID');
+            }
+            else{
+                roomID = Math.floor(Math.random()*10000);
+                inputMaxPlayers = prompt('Please enter the max no. of players (6 or 8)');
+            }
+                var username = prompt('Please tell me your name');
+               
+                if(username !== null && username !== ''){
+                    socket.emit('username', roomID, username, inputMaxPlayers);
+                }
+            else{
+                alert("Please enter User Name to proceed!")
+                enterUserName();
+            }
+        })();
+        
+
+    </script>
+  </body>
+</html>
