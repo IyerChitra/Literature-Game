@@ -1,0 +1,143 @@
+
+
+.App {
+  text-align: center;
+  background: #29223a;
+    height: 100%;
+}
+
+.App-logo {
+  height: 5em;
+    align-self: flex-start;
+  pointer-events: none;
+}
+
+.gifs{
+    height: 50%;
+    background:#29223a;
+}
+
+.messages{
+    height: 20%;
+    align-items: center;
+    background:#29223a;
+    color: white;
+}
+.msgBox{
+    height: 100%;
+    align-items: center;
+    background:#29223a;
+    color: white;
+}
+.players{
+    height: 70%;
+    background:#29223a;
+}
+
+.player{
+    height: 25%;
+    width: 5%;
+}
+.playerBox{
+    height: 100%;
+    width: 100%;
+    color: white;
+    align-content: space-around;
+    font-size: 2em;
+    padding-top: 1em;
+}
+.App-name {
+  height: 5em;
+    align-self: flex-end;
+        font-family: 'Graphik Web';
+  
+}
+/*
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}*/
+
+.App-header {
+  background:#29223a; /*#1f2121;*/
+  height: 70%;
+    /*border-radius: 0 0 50% 50%/ 0 0 50% 50%;*/
+    /*border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+        font-family: 'Graphik Web';
+    /*transform: scaleX(1.5);*/
+}
+
+.hex {
+    background-image: url(hex.jpg);
+    background-repeat: repeat;
+    width: 100%;
+    height: 15%;
+}
+
+.lit {
+    height: 50%;
+    width: 30%;
+    background-color: #46bf36;
+    color: white;
+    padding-left: 34px;
+    padding-right: 34px;
+}
+
+.SignIn-header {
+  background-image: linear-gradient(90deg, #721776 30%, #061691);
+  height: 40%;
+    border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #bab1ec;
+        font-family: 'Graphik Web';
+}
+
+
+.action {
+    
+    bottom: 0em;
+  background-color: #29223a;
+  height: 5%;
+    
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  color: white;
+        font-family: 'Graphik Web';
+}
+
+.actionContainer{
+    height: 100%;
+    background-color: #29223a;
+    align-items: center;
+}
+
+
+.players {
+    height: 60%;
+}
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

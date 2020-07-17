@@ -32,7 +32,7 @@ io.on('connection', function(socket){
         console.log(socket.username + ' connected');
         playerNo = playerNo+1;
         console.log(playerNo);
-        io.to(socket.id).emit('userMessage', 'Welcome ' + username +'! You are Player' + playerIDs.length + '! You have joined the room ' + roomID);
+        io.to(socket.id).emit('userM', 'Welcome ' + username +'! You are Player' + playerIDs.length + '! You have joined the room ' + roomID);
         
         if(playerNo === maxPlayers){
             io.emit('userMessage', 'All the players have joined. Please wait for Host to Start the Game...');
@@ -60,7 +60,7 @@ io.on('connection', function(socket){
         //io.emit('is_online', '<strong>'+randomCards+'</strong>dealt to users');
     });
     
-    socket.on('askCard', function(playerNo, askedCard){
+    socket.on('askCard', function(playerNo, askedCard){   //PR Comment: make the cards array of arrays
         var currentPlayer = playerIDs.indexOf(socket.id);
         var askedPlayerCards = randomCards[playerNo-1];
         var currentPlayerCards = randomCards[currentPlayer];
